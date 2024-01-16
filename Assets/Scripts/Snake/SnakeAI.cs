@@ -9,80 +9,47 @@ public class SnakeAI : MonoBehaviour
     public GameObject chaseTarget;
 
     public float rotateSpeed = 25;
-    public float moveSpeed = 25;
+    public float patrolSpeed = 5;
+    public float chaseSpeed = 10;
     private Vector2 direction;
 
-    public LayerMask targetLayer;
-    public LayerMask obstructionLayer;
-    public float FOVRadius;
-    public float FOVAngle;
-
-    public bool debug;
+    public FieldOfView fov;
 
     // Start is called before the first frame update
     void Start()
     {
         state = EState.PATROL;
-        StartCoroutine(FOVCheck());
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(fov.targetDetected) {
+            state = EState.CHASE;	
+		}
+        else { 
+            switch(state) {
+                case EState.PATROL:
+                case EState.ALERT:
+                    state = EState.PATROL;
+                    break;
+                case EState.CHASE:
+                    state = EState.ALERT;
+                    break;
+		    }	
+		}
+
         switch(state) {
             case EState.CHASE:
-				// rotate towards cursor
+				// rotate towards target
 				direction = chaseTarget.transform.position - transform.position;
 				float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 				Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 				transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotateSpeed *Time.deltaTime);
 
 				// move towards cursor
-				transform.position = Vector3.MoveTowards(transform.position, chaseTarget.transform.position, moveSpeed * Time.deltaTime);
+				transform.position = Vector3.MoveTowards(transform.position, chaseTarget.transform.position, chaseSpeed * Time.deltaTime);
                 break;
 		}
-    }
-
-    private IEnumerator FOVCheck() {
-        WaitForSeconds wait = new WaitForSeconds(.2f);
-
-        while(true) {
-            yield return wait;
-
-            if(TargetDetected()) {
-                state = EState.CHASE; 
-		    }
-            else { 
-                if(state == EState.CHASE) {
-                    state = EState.ALERT;	
-				}
-                else {
-                    state = EState.PATROL;	
-				}
-	        }
-		}
-    }
-
-    private bool TargetDetected() {
-        Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, FOVRadius, targetLayer);
-
-        if(rangeCheck.Length > 0) {
-            Transform target = rangeCheck[0].transform;
-            Vector2 direction2target = (target.position - transform.position).normalized;
-
-            if(Vector2.Angle(transform.up, direction2target) < FOVAngle/2) {
-                float distance2target = Vector2.Distance(transform.position, target.position);
-
-                Debug.DrawRay(transform.position, direction2target, Color.red);
-
-                if(!Physics2D.Raycast(transform.position, direction2target, distance2target, obstructionLayer)) {
-                    print("detected player");
-                    return true;
-				}
-		    }
-		}
-
-        print("not detected");
-        return false;
     }
 }
