@@ -25,6 +25,6 @@ public class NewBehaviourScript : MonoBehaviour
 
         // move towards cursor
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = Vector2.MoveTowards(transform.position, mousePos, moveSpeed * Time.deltaTime);
+        transform.position = mousePos;
     }
 }

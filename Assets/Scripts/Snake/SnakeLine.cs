@@ -29,7 +29,8 @@ public class SnakeLine : MonoBehaviour
 
         for(int i = 1; i < length; i++)
         {
-            segPos[i] = Vector3.SmoothDamp(segPos[i], segPos[i - 1] + target.right * targetDist, ref segVel[i], smoothSpeed);
+            Vector3 targetPos = segPos[i - 1] + (segPos[i] - segPos[i - 1]).normalized * targetDist;
+            segPos[i] = Vector3.SmoothDamp(segPos[i], targetPos, ref segVel[i],smoothSpeed);
 		}
 
         lineRenderer.SetPositions(segPos);
