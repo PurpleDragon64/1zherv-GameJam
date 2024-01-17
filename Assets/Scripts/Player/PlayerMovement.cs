@@ -35,8 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && canDash)
         {
-            print("Dash");
-            StartCoroutine(Dash());
+            TriggerDash();
         }
     }
 
@@ -75,5 +74,9 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+
+    public void TriggerDash() { 
+	    StartCoroutine(Dash());
     }
 }
