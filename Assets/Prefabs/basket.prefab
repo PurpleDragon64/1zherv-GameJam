@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3795869393306317785}
   - component: {fileID: 7152925716474814112}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: basket-lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9088459564252927982}
   - component: {fileID: 6501341811482964548}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: basket
   m_TagString: Untagged
   m_Icon: {fileID: 0}

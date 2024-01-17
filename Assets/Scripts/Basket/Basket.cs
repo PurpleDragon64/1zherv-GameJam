@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class BasketInteract : MonoBehaviour, IInteractible
 {
-    bool playerInside;
+    private bool playerInside;
+    private bool focused;
 
     void Start() {
-        playerInside = false; 
+        playerInside = false;
+        focused = false;
     }
 
-    public void InteractibleOnFocus() { 
-        print("basket in focus");
+    public void Intble_Focus() { 
+        if(!focused) { 
+			focused = true;
+		}
     }
 
-    public void InteractibleOnUnfocus() { 
+    public void Intble_Unfocus() {
+        if(focused) { 
+			focused = false;
+		}
+    }
 
+    public bool Intble_IsFocused() {
+        return focused;
     }
 
     public void Interact(GameObject Interacter) { 
@@ -27,13 +37,15 @@ public class BasketInteract : MonoBehaviour, IInteractible
             // player is not inside, let him in	
 
             // set interacters layer to ignore raycast layer
-            // Interacter.layer = 2;
+            Interacter.layer = 2;
+            
+
 		}
 
         print(Interacter + " interacted with basket");
     }
 
-    public bool Interactible() {
+    public bool Intble() {
         return true;
     }
 }
