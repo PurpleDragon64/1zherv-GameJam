@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SnakeAI : MonoBehaviour
 {
@@ -19,9 +20,15 @@ public class SnakeAI : MonoBehaviour
     private Vector3 targetPos;
     private Vector2 direction;
 
+    NavMeshAgent agent;
+
     // Start is called before the first frame update
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+
         state = EState.PATROL;
         fov.FOVAngle = defaultFOVAngle;
     }
@@ -37,7 +44,7 @@ public class SnakeAI : MonoBehaviour
         float angle;
         Quaternion rotation;
 
-        switch(state) {
+        switch (state) {
             case EState.CHASE:
                 if(transform.position != targetPos) { 
 					// rotate towards target
