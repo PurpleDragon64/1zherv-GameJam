@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float moveSpeed = 10f;
+    public Animator animator;
+
     private Rigidbody2D rb;
 
     private Vector2 inputDirection;
-    public float moveSpeed = 10f;
 
     public float dashSpeed = 30f;
     public float dashDuration = 1f;
@@ -50,8 +52,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = inputDirection.normalized * moveSpeed;
+        float angle = Mathf.Atan2(inputDirection.y, inputDirection.x) * Mathf.Rad2Deg;
+		Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+		transform.rotation = rotation;
 
+        rb.velocity = inputDirection.normalized.magnitude * transform.right * moveSpeed;
+
+        // animations
+        animator.SetFloat("MoveSpeed", inputDirection.magnitude);
     }
 
     private IEnumerator Dash()
