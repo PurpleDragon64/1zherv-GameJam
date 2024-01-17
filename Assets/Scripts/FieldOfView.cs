@@ -23,7 +23,10 @@ public class FieldOfView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(FOVCheck());   
+    }
+    private void Update()
+    {
+            targetDetected = TargetDetected();
     }
 
     private IEnumerator FOVCheck() {
@@ -51,7 +54,7 @@ public class FieldOfView : MonoBehaviour
             if(Vector2.Angle(transform.right, direction2target) < FOVAngle/2) {
                 float distance2target = Vector2.Distance(transform.position, target.position);
 
-                if(Physics2D.Raycast(transform.position, direction2target, distance2target)) {
+                if(!Physics2D.Raycast(transform.position, direction2target, distance2target, obstructionLayer)) {
                     return true;
 				}
 		    }

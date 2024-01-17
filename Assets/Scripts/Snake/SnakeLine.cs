@@ -17,6 +17,7 @@ public class SnakeLine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lineRenderer.sortingLayerName = "Foreground";
         lineRenderer.positionCount = length;
         segPos = new Vector3[length];
         segVel = new Vector3[length];
