@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     public float dashDuration = 1f;
     public float dashCooldown = 1f;
     public bool moveLocked = false;
-
     private bool canDash = true;
     private Rigidbody2D rb;
     private Vector2 inputDirection;
@@ -28,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
+
         inputDirection.x = Input.GetAxisRaw("Horizontal");
         inputDirection.y = Input.GetAxisRaw("Vertical");
 
@@ -61,15 +61,11 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        //rb.AddForce(inputDirection * 1000, ForceMode2D.Impulse);
-        //Vector3 target = transform.position + dashLenght * new Vector3(inputDirection.x, inputDirection.y, transform.position.z);
-        //transform.position = Vector2.MoveTowards(transform.position, target, dashSpeed * Time.deltaTime);
         moveLocked = true;
-        canDash = false;
         rb.velocity = inputDirection.normalized * dashSpeed;
         yield return new WaitForSeconds(dashDuration);
         moveLocked = false;
-
+        canDash = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }

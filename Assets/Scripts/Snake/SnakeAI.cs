@@ -30,7 +30,10 @@ public class SnakeAI : MonoBehaviour
 
     private Vector3 targetPos;
 
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +41,9 @@ public class SnakeAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+        // used for enabeling and disabeling snake movement
+        agent.isStopped = true;
 
         waypointIdx = 0;
         waypoint = waypoints[waypointIdx];
@@ -54,13 +60,17 @@ public class SnakeAI : MonoBehaviour
     {
         if (fov.targetDetected)
         {
-            targetPos = chaseTarget.transform.position;
+            // set state
             state = EState.CHASE;
+            // set parameters
             agent.speed = chaseSpeed;
             agent.acceleration = chaseAcceleration;
             rotateSpeed = chaserotateSpeed;
+
+            targetPos = chaseTarget.transform.position;
         }
 
+        // destination reached
         if (agent.remainingDistance < 0.5f)
         {
             if (state == EState.PATROL)
@@ -69,7 +79,9 @@ public class SnakeAI : MonoBehaviour
             }
             else
             {
+                // set state
                 state = EState.PATROL;
+                // set parameters
                 agent.speed = patrolSpeed;
                 agent.acceleration = patrolAcceleration;
                 rotateSpeed = patrolRotateSpeed;

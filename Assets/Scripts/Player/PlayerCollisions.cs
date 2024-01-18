@@ -4,24 +4,11 @@ using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print("collision");
-        if (collision.collider.tag == "Enemy")
+        if (collision.collider.CompareTag("Enemy"))
         {
-            print("enemy");
+            GameManager.Instance.UpdateGameState(GameState.Death);
         }
     }
 }
