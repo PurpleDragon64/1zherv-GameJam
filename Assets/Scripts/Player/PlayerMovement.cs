@@ -87,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnGameStateChange(GameState state)
     {
-        print("From PlayerMovemet: game state changed");
         canMove = state == GameState.Playing;
     }
 }

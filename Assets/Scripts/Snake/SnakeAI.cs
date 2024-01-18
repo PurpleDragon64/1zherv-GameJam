@@ -51,6 +51,8 @@ public class SnakeAI : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
+        agent.isStopped = false;
+
         waypointIdx = 0;
         waypoint = waypoints[waypointIdx];
         waypointsCount = waypoints.Length;
@@ -66,11 +68,12 @@ public class SnakeAI : MonoBehaviour
     {
         if (fov.targetDetected)
         {
-            targetPos = chaseTarget.transform.position;
             state = EState.CHASE;
             agent.speed = chaseSpeed;
             agent.acceleration = chaseAcceleration;
             rotateSpeed = chaserotateSpeed;
+
+            targetPos = chaseTarget.transform.position;
         }
 
         if (agent.remainingDistance < 0.5f)
@@ -112,6 +115,6 @@ public class SnakeAI : MonoBehaviour
     private void OnGameStateChanged(GameState state)
     {
         print("From SnakeAI: game state changed");
-        agent.isStopped = true;
+        agent.isStopped = false;
     }
 }

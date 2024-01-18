@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        state = GameState.Playing;
+        UpdateGameState(GameState.Intro);
     }
 
     // Update is called once per frame

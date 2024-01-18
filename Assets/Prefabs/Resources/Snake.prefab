@@ -122,10 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  chaseTarget: {fileID: 0}
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  chaseTarget: {fileID: 6250763942582949399, guid: 7809c6617291341fc97f67dfec48845f, type: 3}
+  waypoints: []
   patrolSpeed: 2
   chaseSpeed: 7
   patrolAcceleration: 5
