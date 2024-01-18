@@ -64,6 +64,7 @@ public class BasketInteract : MonoBehaviour, IInteractible
             Interacter.GetComponent<PlayerMovement>().moveLocked = false;
             Interacter.transform.position = transform.position + new Vector3(direction.x, direction.y, 0);
             Interacter.GetComponent<SpriteRenderer>().enabled = true;
+            Interacter.GetComponent<CircleCollider2D>().enabled = true;
             playerInside = false;
 
             // play sound effect
@@ -77,6 +78,8 @@ public class BasketInteract : MonoBehaviour, IInteractible
             Interacter.transform.position = transform.position;
             Interacter.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Interacter.GetComponent<SpriteRenderer>().enabled = false;
+            Interacter.GetComponent<CircleCollider2D>().enabled = false;
+
             playerInside = true;
 
             // play sound effect

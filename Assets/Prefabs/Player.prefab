@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1066619793
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -757987518, guid: 74e8afd1fad9549cba44c6b5ff5028be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -169,6 +169,7 @@ MonoBehaviour:
   interactibleLayer:
     serializedVersion: 2
     m_Bits: 512
+  canInteract: 0
 --- !u!114 &7751637909667270305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 7751637909667270305}
+  interact: {fileID: 4292535050440223025}
   spawnPoint: {x: 1, y: -1, z: 0}
 --- !u!95 &5457476899575450804
 Animator:

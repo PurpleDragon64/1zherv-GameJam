@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public PlayerMovement movement;
+    public PlayerInteract interact;
     public Vector3 spawnPoint = Vector3.zero;
 
     private void Awake()
@@ -25,15 +26,18 @@ public class PlayerController : MonoBehaviour
     {
         if (state == GameState.Playing)
         {
-            // enable movement
-            movement.moveLocked = false;
             // move player to starting position
             transform.position = spawnPoint;
+
+            // enable movement
+            movement.moveLocked = false;
+            interact.canInteract = true;
         }
         else
         {
             // disable movement
             movement.moveLocked = true;
+            interact.canInteract = false;
         }
     }
 }

@@ -9,6 +9,8 @@ public class PlayerInteract : MonoBehaviour
     private IInteractible lastNearestIntble;
     private IInteractible nearestIntble;
 
+    public bool canInteract;
+
     private void Start()
     {
         lastNearestIntble = null;
@@ -17,6 +19,12 @@ public class PlayerInteract : MonoBehaviour
 
     void Update()
     {
+        if (!canInteract)
+        {
+            return;
+        }
+
+
         nearestIntble = getNearestIntble();
 
         if(nearestIntble != null) { 
