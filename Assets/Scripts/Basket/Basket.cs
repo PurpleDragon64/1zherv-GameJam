@@ -9,7 +9,7 @@ public class BasketInteract : MonoBehaviour, IInteractible
     private bool playerInside;
     private bool focused;
     private Vector2 direction;
-    public BasketUI ui;
+    public BubbleHintUI ui;
     public Transform basketLid;
 
     void Start() {

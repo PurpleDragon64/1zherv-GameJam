@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasketUI : MonoBehaviour
+public class BubbleHintUI : MonoBehaviour
 {
     bool hidden;
 
@@ -27,9 +27,5 @@ public class BasketUI : MonoBehaviour
             hidden = true;	
             gameObject.SetActive(false);
 		}
-    }
-
-    private void EaseInFadeIn() { 
-         
     }
 }
