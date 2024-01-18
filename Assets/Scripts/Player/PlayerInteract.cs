@@ -30,7 +30,7 @@ public class PlayerInteract : MonoBehaviour
 			nearestIntble.Intble_Focus();
 
             // interact action
-			if(Input.GetKeyDown(KeyCode.E)) {
+			if(Input.GetKeyDown(KeyCode.LeftShift)) {
                 nearestIntble.Interact(this.gameObject);
 			}
 		}
