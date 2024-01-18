@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 3665266216988301014}
   - component: {fileID: 969843302378147666}
   - component: {fileID: 696225760215858982}
-  - component: {fileID: 4641767596815333449}
   - component: {fileID: 8604557915521958}
+  - component: {fileID: 4641767596815333449}
+  - component: {fileID: 2512540862092223634}
   - component: {fileID: 6090307573240049233}
   m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,23 +152,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.41
---- !u!114 &4641767596815333449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6250763942582949399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c86f25d847c264207b14ce80c2430b81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 8
-  animator: {fileID: 8604557915521958}
-  dashSpeed: 40
-  dashDuration: 0.05
-  dashCooldown: 0.5
 --- !u!95 &8604557915521958
 Animator:
   serializedVersion: 5
@@ -189,6 +173,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4641767596815333449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250763942582949399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86f25d847c264207b14ce80c2430b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 8
+  animator: {fileID: 8604557915521958}
+  dashSpeed: 40
+  dashDuration: 0.05
+  dashCooldown: 0.5
+  canMove: 1
+--- !u!114 &2512540862092223634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250763942582949399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77ba05b6f6cb491896b0736541a4512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 4641767596815333449}
+  spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &6090307573240049233
 MonoBehaviour:
   m_ObjectHideFlags: 0

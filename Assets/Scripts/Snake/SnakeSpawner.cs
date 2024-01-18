@@ -28,9 +28,13 @@ public class SnakeSpawner : MonoBehaviour
             // Note: first waypoint is the parent (this GO)
             Transform[] waypoints = GetComponentsInChildren<Transform>();
 
-            // Spawn snake and fill his waypoints
+            // Spawn snake and fill his waypoints and set target
             GameObject snake = Instantiate(prefab, transform);
-            snake.GetComponent<SnakeAI>().waypoints = waypoints;
+            SnakeAI snakeAI = snake.GetComponent<SnakeAI>();
+            snakeAI.waypoints = waypoints;
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            snakeAI.chaseTarget = player;
         }
     }
 

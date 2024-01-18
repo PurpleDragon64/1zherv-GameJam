@@ -38,7 +38,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (state == GameState.Intro)
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                UpdateGameState(GameState.Playing);
+            }
+        }
+        if (state == GameState.Death)
+        {
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                UpdateGameState(GameState.Playing);
+            }
+        }
     }
 
     public void UpdateGameState(GameState newState)
@@ -48,8 +61,10 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Intro:
+                HandleStateIntro();
                 break;
             case GameState.Playing:
+                HandleStatePlaying();
                 break;
             case GameState.Death:
                 HandleStateDeath();
@@ -66,9 +81,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void HandleStateIntro()
+    {
+    }
+
+    private void HandleStatePlaying()
+    {
+        Time.timeScale = 1;
+    }
+
     private void HandleStateDeath()
     {
         print("Died");
+        Time.timeScale = 0;
     }
 }
 

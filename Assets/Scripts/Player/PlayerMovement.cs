@@ -14,18 +14,9 @@ public class PlayerMovement : MonoBehaviour
     public float dashSpeed = 30f;
     public float dashDuration = 1f;
     public float dashCooldown = 1f;
-    private bool canMove = true;
     private bool canDash = true;
 
-    private void Awake()
-    {
-        GameManager.OnGameStateChanged += OnGameStateChange;
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.OnGameStateChanged -= OnGameStateChange;
-    }
+    public bool canMove = false;
 
     // Start is called before the first frame update
     void Start()
@@ -75,18 +66,13 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        canDash = false;
+        canMove = false;
         rb.velocity = inputDirection.normalized * dashSpeed;
         yield return new WaitForSeconds(dashDuration);
-        canMove = false;
+        canMove = true;
+        canDash = false;
 
         yield return new WaitForSeconds(dashCooldown);
-        canMove = true;
         canDash = true;
-    }
-
-    private void OnGameStateChange(GameState state)
-    {
-        canMove = state == GameState.Playing;
     }
 }

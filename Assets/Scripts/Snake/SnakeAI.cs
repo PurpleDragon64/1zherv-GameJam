@@ -30,17 +30,8 @@ public class SnakeAI : MonoBehaviour
 
     private Vector3 targetPos;
 
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
 
-    private void Awake()
-    {
-        GameManager.OnGameStateChanged += OnGameStateChanged;
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.OnGameStateChanged -= OnGameStateChanged;
-    }
 
 
 
@@ -51,7 +42,8 @@ public class SnakeAI : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        agent.isStopped = false;
+        // used for enabeling and disabeling snake movement
+        agent.isStopped = true;
 
         waypointIdx = 0;
         waypoint = waypoints[waypointIdx];
@@ -68,7 +60,9 @@ public class SnakeAI : MonoBehaviour
     {
         if (fov.targetDetected)
         {
+            // set state
             state = EState.CHASE;
+            // set parameters
             agent.speed = chaseSpeed;
             agent.acceleration = chaseAcceleration;
             rotateSpeed = chaserotateSpeed;
@@ -76,6 +70,7 @@ public class SnakeAI : MonoBehaviour
             targetPos = chaseTarget.transform.position;
         }
 
+        // destination reached
         if (agent.remainingDistance < 0.5f)
         {
             if (state == EState.PATROL)
@@ -84,7 +79,9 @@ public class SnakeAI : MonoBehaviour
             }
             else
             {
+                // set state
                 state = EState.PATROL;
+                // set parameters
                 agent.speed = patrolSpeed;
                 agent.acceleration = patrolAcceleration;
                 rotateSpeed = patrolRotateSpeed;
@@ -110,11 +107,5 @@ public class SnakeAI : MonoBehaviour
     void MoveSnake()
     {
         agent.SetDestination(targetPos);
-    }
-
-    private void OnGameStateChanged(GameState state)
-    {
-        print("From SnakeAI: game state changed");
-        agent.isStopped = false;
     }
 }
