@@ -10,12 +10,19 @@ public class BasketInteract : MonoBehaviour, IInteractible
     private bool focused;
     private Vector2 direction;
     public BubbleHintUI ui;
+    private AudioSource audio;
     public Transform basketLid;
+
+    [SerializeField]
+    private AudioClip clipIn;
+    [SerializeField]
+    private AudioClip clipOut;
 
     void Start() {
         playerInside = false;
         focused = false;
         basketLid.localPosition = new Vector3(.25f, -.25f);
+        audio = GetComponent<AudioSource>();
     }
 
     void Update() { 
@@ -58,6 +65,9 @@ public class BasketInteract : MonoBehaviour, IInteractible
             Interacter.transform.position = transform.position + new Vector3(direction.x, direction.y, 0);
             Interacter.GetComponent<SpriteRenderer>().enabled = true;
             playerInside = false;
+
+            // play sound effect
+            audio.PlayOneShot(clipOut,2);
 		}
         else {
             // player is not inside, let him in	
@@ -68,6 +78,9 @@ public class BasketInteract : MonoBehaviour, IInteractible
             Interacter.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Interacter.GetComponent<SpriteRenderer>().enabled = false;
             playerInside = true;
+
+            // play sound effect
+            audio.PlayOneShot(clipIn,2);
 
             // dont show ui bubble when inside
             ui.HideBubble();
