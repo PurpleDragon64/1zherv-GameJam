@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         // Handle user input for various states
         if (state == GameState.Intro)
         {
-            if (Input.GetKeyDown(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 UpdateGameState(GameState.Playing);
             }
@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleStateDeath()
     {
+        print("you lost");
         Time.timeScale = 0;
     }
 

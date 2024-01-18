@@ -20,19 +20,10 @@ public class SnakeController : MonoBehaviour
 
     private void OnGameStateChanged(GameState state)
     {
-        if (state == GameState.Playing)
+        if (state == GameState.Death)
         {
             // disable snake movement
-            snakeAI.agent.isStopped = false;
-            // move snake to starting position
-            transform.position = snakeAI.waypoints[0].position;
-            // set first waypoint as current active
-            snakeAI.agent.SetDestination(snakeAI.waypoints[1].position);
-        }
-        else
-        {
-            // disable snake movement
-            snakeAI.agent.isStopped = true;
+            snakeAI.EnableMovement(false);
         }
     }
 }

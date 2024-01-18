@@ -13,11 +13,6 @@ public class End : MonoBehaviour, IInteractible
         focused = false;
     }
 
-    void Update()
-    {
-
-    }
-
     public void Intble_Focus()
     {
         focused = true;
@@ -37,8 +32,6 @@ public class End : MonoBehaviour, IInteractible
 
     public void Interact(GameObject Interacter)
     {
-        print(Interacter + " interacted with basket");
-
         GameManager.Instance.UpdateGameState(GameState.Win);
     }
 

@@ -6,6 +6,9 @@ public class SnakeSpawner : MonoBehaviour
 {
     private GameObject prefab;
 
+    private Transform[] waypoints;
+    private GameObject snake;
+
     private void Awake()
     {
         // Load snake prefab from Assets
@@ -21,22 +24,41 @@ public class SnakeSpawner : MonoBehaviour
         GameManager.OnGameStateChanged -= OnGameStateChanged;
     }
 
+    private void Start()
+    {
+        // Load transform of every child (waypoint)
+        // Note: first waypoint in array is the parent (this GO)
+        waypoints = GetComponentsInChildren<Transform>();
+        snake = null;
+    }
+
     private void OnGameStateChanged(GameState state)
     {
-        if (state == GameState.Intro)
+        if (state == GameState.Playing)
         {
-            // Load transform of every child (waypoint)
-            // Note: first waypoint in array is the parent (this GO)
-            Transform[] waypoints = GetComponentsInChildren<Transform>();
-
-            // Spawn snake and fill his waypoints and set chase target
-            GameObject snake = Instantiate(prefab, transform);
-            SnakeAI snakeAI = snake.GetComponent<SnakeAI>();
-            snakeAI.waypoints = waypoints;
-
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            snakeAI.chaseTarget = player;
+            KillSnake();
+            SpawnSnake();
         }
+    }
+
+    private void KillSnake()
+    {
+        // in first start, no snake is present
+        if (snake != null)
+        {
+            Destroy(snake);
+        }
+    }
+
+    private void SpawnSnake()
+    {
+        // Spawn snake and fill his waypoints and set chase target
+        snake = Instantiate(prefab, transform);
+        SnakeAI snakeAI = snake.GetComponent<SnakeAI>();
+        snakeAI.waypoints = waypoints;
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        snakeAI.chaseTarget = player;
     }
 
 }

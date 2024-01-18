@@ -24,9 +24,9 @@ public class SnakeAI : MonoBehaviour
     [SerializeField] float chaserotateSpeed = 25;
     private float rotateSpeed = 5;
     [Range(0,360)] [SerializeField] float defaultFOVAngle;
+    [SerializeField] NavMeshAgent agent; // for navigation
 
 
-    public NavMeshAgent agent; // for navigation
     private Vector3 targetPos; // position towards which the snake is headed
 
 
@@ -44,18 +44,12 @@ public class SnakeAI : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        // used for enabeling and disabeling snake movement
-        agent.isStopped = true;
-
-        // initialize route
-        waypointIdx = 0;
-        waypoint = waypoints[waypointIdx];
-        waypointsCount = waypoints.Length;
-        targetPos = waypoint.position;
-
-        state = EState.PATROL;
-
         fov.FOVAngle = defaultFOVAngle;
+
+        waypointsCount = waypoints.Length;
+
+        ResetState();
+        EnableMovement(true);
     }
 
     // Update is called once per frame
@@ -113,5 +107,21 @@ public class SnakeAI : MonoBehaviour
     void MoveSnake()
     {
         agent.SetDestination(targetPos);
+    }
+
+    private void ResetState()
+    {
+        // initialize route
+        waypointIdx = 1;
+        waypoint = waypoints[waypointIdx];
+        targetPos = waypoint.position;
+
+        state = EState.PATROL;
+        print("State changed to patrol");
+    }
+
+    public void EnableMovement(bool flag)
+    {
+        agent.isStopped = !flag;
     }
 }
