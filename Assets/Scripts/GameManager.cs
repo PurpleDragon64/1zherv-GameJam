@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
   
     public GameState state;
 
+    // signature of functins that hangle GameState changes
     public delegate void StateChanged(GameState newState);
+    // event, which broadcasts that GameState change happened
     public static event StateChanged OnGameStateChanged;
 
 
@@ -32,12 +34,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Game start in state Intro
         UpdateGameState(GameState.Intro);
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Handle user input for various states
         if (state == GameState.Intro)
         {
             if (Input.GetKeyDown(KeyCode.K))
@@ -70,6 +74,7 @@ public class GameManager : MonoBehaviour
                 HandleStateDeath();
                 break;
             case GameState.Win:
+                HandleStateWin();
                 break;
             default:
                 break;
@@ -92,14 +97,18 @@ public class GameManager : MonoBehaviour
 
     private void HandleStateDeath()
     {
-        print("Died");
         Time.timeScale = 0;
+    }
+
+    private void HandleStateWin()
+    {
+
     }
 }
 
 public enum GameState {
-    Intro,
-    Playing,
-    Death,
-    Win
+    Intro,      // show start screen, wait for user input
+    Playing,    // player and enemies can move
+    Death,      // player collided with enemy, freeze, show restart prompt and wait for input
+    Win         // player reached final destination, show winning screen
 };

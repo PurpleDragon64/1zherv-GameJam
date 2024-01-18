@@ -11,12 +11,13 @@ public class SnakeSpawner : MonoBehaviour
         // Load snake prefab from Assets
         prefab = Resources.Load<GameObject>("Snake");
 
-        // Subscribe to Game State changed event
+        // subscribe to GameStateChanged event
         GameManager.OnGameStateChanged += OnGameStateChanged;
     }
 
     private void OnDestroy()
     {
+        // unsubscribe from GameStateChanged event
         GameManager.OnGameStateChanged -= OnGameStateChanged;
     }
 
@@ -24,11 +25,11 @@ public class SnakeSpawner : MonoBehaviour
     {
         if (state == GameState.Intro)
         {
-            // Load transform from every child
-            // Note: first waypoint is the parent (this GO)
+            // Load transform of every child (waypoint)
+            // Note: first waypoint in array is the parent (this GO)
             Transform[] waypoints = GetComponentsInChildren<Transform>();
 
-            // Spawn snake and fill his waypoints and set target
+            // Spawn snake and fill his waypoints and set chase target
             GameObject snake = Instantiate(prefab, transform);
             SnakeAI snakeAI = snake.GetComponent<SnakeAI>();
             snakeAI.waypoints = waypoints;

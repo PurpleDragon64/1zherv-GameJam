@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        // subscribe to GameStateChanged event
         GameManager.OnGameStateChanged += OnGameStateChange;
     }
 
     private void OnDestroy()
     {
+        // unsubscribe from GameStateChanged event
         GameManager.OnGameStateChanged -= OnGameStateChange;
     }
 
@@ -23,11 +25,14 @@ public class PlayerController : MonoBehaviour
     {
         if (state == GameState.Playing)
         {
+            // enable movement
             movement.moveLocked = false;
+            // move player to starting position
             transform.position = spawnPoint;
         }
         else
         {
+            // disable movement
             movement.moveLocked = true;
         }
     }

@@ -5,59 +5,63 @@ using UnityEngine.AI;
 
 public class SnakeAI : MonoBehaviour
 {
-    // debug
-    public enum EState {PATROL, CHASE, ALERT};
-    public EState state;
 
     public GameObject chaseTarget;
     public Transform[] waypoints;
-    private int waypointIdx;
-    private Transform waypoint;
-    private int waypointsCount;
-
-
-    public float patrolSpeed = 5;
-    public float chaseSpeed = 10;
-    public float patrolAcceleration = 6;
-    public float chaseAcceleration = 13;
-    public float patrolRotateSpeed = 5;
-    public float chaserotateSpeed = 25;
-    private float rotateSpeed = 5;
-
     public FieldOfView fov;
-    [Range(0,360)]
-    public float defaultFOVAngle;
 
-    private Vector3 targetPos;
-
-    public NavMeshAgent agent;
+    private int waypointIdx;
+    private int waypointsCount;
+    private Transform waypoint; // currently targeted waypoint
 
 
+    // parameters
+    [SerializeField] float patrolSpeed = 5;
+    [SerializeField] float chaseSpeed = 10;
+    [SerializeField] float patrolAcceleration = 6;
+    [SerializeField] float chaseAcceleration = 13;
+    [SerializeField] float patrolRotateSpeed = 5;
+    [SerializeField] float chaserotateSpeed = 25;
+    private float rotateSpeed = 5;
+    [Range(0,360)] [SerializeField] float defaultFOVAngle;
 
+
+    public NavMeshAgent agent; // for navigation
+    private Vector3 targetPos; // position towards which the snake is headed
+
+
+    private enum EState {PATROL, // follow route defined by waypoints
+                        CHASE,  // chase after player, when lost sight, go to
+                                // last seen position
+    };
+    private EState state;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        // because of NavMeshPlus (2d)
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
         // used for enabeling and disabeling snake movement
         agent.isStopped = true;
 
+        // initialize route
         waypointIdx = 0;
         waypoint = waypoints[waypointIdx];
         waypointsCount = waypoints.Length;
         targetPos = waypoint.position;
 
-
         state = EState.PATROL;
+
         fov.FOVAngle = defaultFOVAngle;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // player in sight
         if (fov.targetDetected)
         {
             // set state
@@ -75,9 +79,10 @@ public class SnakeAI : MonoBehaviour
         {
             if (state == EState.PATROL)
             {
+                // set next waypoint from route as current
                 waypoint = waypoints[++waypointIdx % waypointsCount];
             }
-            else
+            else // reached position where player was last seen -> return to patrol state
             {
                 // set state
                 state = EState.PATROL;
@@ -96,6 +101,7 @@ public class SnakeAI : MonoBehaviour
 
     void RotateSnake()
     {
+        // rotate snake head based on velocity direction
         Vector3 velocity = agent.velocity;
 
         float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
