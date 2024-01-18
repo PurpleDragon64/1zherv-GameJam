@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scenes/Tom/NavMesh-NavMesh.asset.meta
 guid: fdee38b04446d45fd87b38665c7a15e6
-========
-guid: b9fe92ff2af4340918a082ad4073a9cc
->>>>>>>> game-manager:Assets/Scenes/Tonda/NavMesh-NavMesh 1.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 23800000
