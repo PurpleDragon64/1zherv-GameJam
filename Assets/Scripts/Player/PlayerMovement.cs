@@ -6,16 +6,14 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public Animator animator;
-
-    private Rigidbody2D rb;
-
-    private Vector2 inputDirection;
-
     public float dashSpeed = 30f;
     public float dashDuration = 1f;
     public float dashCooldown = 1f;
-    private bool isDashing = false;
+    public bool moveLocked = false;
+
     private bool canDash = true;
+    private Rigidbody2D rb;
+    private Vector2 inputDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDashing)
+        if (moveLocked)
         {
             return;
         }
@@ -41,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDashing)
+        if (moveLocked)
         {
             return;
         }
@@ -66,11 +64,11 @@ public class PlayerMovement : MonoBehaviour
         //rb.AddForce(inputDirection * 1000, ForceMode2D.Impulse);
         //Vector3 target = transform.position + dashLenght * new Vector3(inputDirection.x, inputDirection.y, transform.position.z);
         //transform.position = Vector2.MoveTowards(transform.position, target, dashSpeed * Time.deltaTime);
-        isDashing = true;
+        moveLocked = true;
         canDash = false;
         rb.velocity = inputDirection.normalized * dashSpeed;
         yield return new WaitForSeconds(dashDuration);
-        isDashing = false;
+        moveLocked = false;
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
