@@ -49,6 +49,9 @@ TagManager:
   - name: Foreground
     uniqueID: 4199949755
     locked: 0
+  - name: DeathUI
+    uniqueID: 3573357523
+    locked: 0
   - name: Player
     uniqueID: 1066619793
     locked: 0

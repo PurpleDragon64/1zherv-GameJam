@@ -65,10 +65,17 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Dash()
     {
         moveLocked = true;
-        rb.velocity = inputDirection.normalized * dashSpeed;
+        animator.SetBool("Dashing", true);
+
+        float angle = Mathf.Atan2(inputDirection.y, inputDirection.x) * Mathf.Rad2Deg;
+		Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+		transform.rotation = rotation;
+
+        rb.velocity = inputDirection.normalized.magnitude * dashSpeed * transform.right;
         yield return new WaitForSeconds(dashDuration);
         moveLocked = false;
         canDash = false;
+        animator.SetBool("Dashing", false);
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
