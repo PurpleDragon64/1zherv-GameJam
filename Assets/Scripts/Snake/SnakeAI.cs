@@ -32,6 +32,18 @@ public class SnakeAI : MonoBehaviour
 
     NavMeshAgent agent;
 
+    private void Awake()
+    {
+        GameManager.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -95,5 +107,11 @@ public class SnakeAI : MonoBehaviour
     void MoveSnake()
     {
         agent.SetDestination(targetPos);
+    }
+
+    private void OnGameStateChanged(GameState state)
+    {
+        print("From SnakeAI: game state changed");
+        agent.isStopped = true;
     }
 }

@@ -18,10 +18,9 @@ public class PlayerCollisions : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print("collision");
-        if (collision.collider.tag == "Enemy")
+        if (collision.collider.CompareTag("Enemy"))
         {
-            print("enemy");
+            GameManager.Instance.UpdateGameState(GameState.Death);
         }
     }
 }

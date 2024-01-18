@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public enum GameState {Intro, Playing, Death, Win};
+  
     public GameState state;
 
     public delegate void StateChanged(GameState newState);
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
             case GameState.Playing:
                 break;
             case GameState.Death:
+                HandleStateDeath();
                 break;
             case GameState.Win:
                 break;
@@ -63,4 +65,16 @@ public class GameManager : MonoBehaviour
             OnGameStateChanged(state);
         }
     }
+
+    private void HandleStateDeath()
+    {
+        print("Died");
+    }
 }
+
+public enum GameState {
+    Intro,
+    Playing,
+    Death,
+    Win
+};

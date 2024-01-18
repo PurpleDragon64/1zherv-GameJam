@@ -14,8 +14,18 @@ public class PlayerMovement : MonoBehaviour
     public float dashSpeed = 30f;
     public float dashDuration = 1f;
     public float dashCooldown = 1f;
-    private bool isDashing = false;
+    private bool canMove = true;
     private bool canDash = true;
+
+    private void Awake()
+    {
+        GameManager.OnGameStateChanged += OnGameStateChange;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= OnGameStateChange;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -26,10 +36,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDashing)
+        if (!canMove)
         {
             return;
         }
+
         inputDirection.x = Input.GetAxisRaw("Horizontal");
         inputDirection.y = Input.GetAxisRaw("Vertical");
 
@@ -42,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDashing)
+        if (!canMove)
         {
             return;
         }
@@ -64,16 +75,19 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        //rb.AddForce(inputDirection * 1000, ForceMode2D.Impulse);
-        //Vector3 target = transform.position + dashLenght * new Vector3(inputDirection.x, inputDirection.y, transform.position.z);
-        //transform.position = Vector2.MoveTowards(transform.position, target, dashSpeed * Time.deltaTime);
-        isDashing = true;
         canDash = false;
         rb.velocity = inputDirection.normalized * dashSpeed;
         yield return new WaitForSeconds(dashDuration);
-        isDashing = false;
+        canMove = false;
 
         yield return new WaitForSeconds(dashCooldown);
+        canMove = true;
         canDash = true;
+    }
+
+    private void OnGameStateChange(GameState state)
+    {
+        print("From PlayerMovemet: game state changed");
+        canMove = state == GameState.Playing;
     }
 }
