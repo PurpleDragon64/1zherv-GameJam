@@ -21,11 +21,9 @@ public class PlayerInteract : MonoBehaviour
 
         if(nearestIntble != null) { 
 			// focus the nearest interactible
-            if(lastNearestIntble != null) { 
-				if(!nearestIntble.Intble_IsFocused() && lastNearestIntble.Intble_IsFocused()) {
-					// switch focus to the new nearest interactible
-					lastNearestIntble.Intble_Unfocus();
-			    }
+			if(lastNearestIntble != null && !nearestIntble.Intble_IsFocused() && lastNearestIntble.Intble_IsFocused()) {
+				// switch focus to the new nearest interactible
+				lastNearestIntble.Intble_Unfocus();
 		    }
 
 			lastNearestIntble = nearestIntble;
