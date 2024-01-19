@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1696520267
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0be64a7a2d5bc464594ae36039661a3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -170,7 +170,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1696520267
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: -899750244, guid: 38d871faa9c684effac3bff9593e61f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -195,7 +195,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 922d1ce9076514c47a934366dcb0b08a, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -512,8 +512,6 @@ MonoBehaviour:
   playerInside: 0
   ui: {fileID: 635969365772054610}
   basketLid: {fileID: 8824792825987610578}
-  clipIn: {fileID: 8300000, guid: 014693c47957343b28a1c68c0dd88908, type: 3}
-  clipOut: {fileID: 8300000, guid: 946b9049ae45a49f583564b5f37763ea, type: 3}
 --- !u!58 &1616713793404906137
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -64,19 +64,25 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        moveLocked = true;
-        animator.SetBool("Dashing", true);
 
+        // if player is not holding any movement keys, dash upwards
+        inputDirection = inputDirection == Vector2.zero ? Vector2.up : inputDirection;
         float angle = Mathf.Atan2(inputDirection.y, inputDirection.x) * Mathf.Rad2Deg;
 		Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 		transform.rotation = rotation;
 
         rb.velocity = inputDirection.normalized.magnitude * dashSpeed * transform.right;
+
+        // animation and sound
+        moveLocked = true;
+        animator.SetTrigger("Dash");
+
+        SoundManager.Instance.PlayDash();
         yield return new WaitForSeconds(dashDuration);
         moveLocked = false;
         canDash = false;
-        animator.SetBool("Dashing", false);
         yield return new WaitForSeconds(dashCooldown);
+        animator.ResetTrigger("Dash");
         canDash = true;
     }
 

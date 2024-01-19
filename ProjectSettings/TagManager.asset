@@ -49,12 +49,12 @@ TagManager:
   - name: Foreground
     uniqueID: 4199949755
     locked: 0
-  - name: DeathUI
-    uniqueID: 3573357523
-    locked: 0
   - name: Player
     uniqueID: 1066619793
     locked: 0
-  - name: UI
+  - name: WorldUI
     uniqueID: 1696520267
+    locked: 0
+  - name: ScreenUI
+    uniqueID: 4169028313
     locked: 0

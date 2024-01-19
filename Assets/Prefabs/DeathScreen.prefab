@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -721609773
-  m_SortingLayer: 3
-  m_SortingOrder: 10
+  m_SortingLayerID: 1696520267
+  m_SortingLayer: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1019130988, guid: 1556e948c65b94facbd9840ab5f927c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -97,7 +97,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 7c2a42fc1913342fba29e1a0a89cc813, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -167,8 +167,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -721609773
-  m_SortingOrder: 10
+  m_SortingLayerID: -125938983
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &884967653656047443
 MonoBehaviour:
@@ -587,7 +587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26, y: 68}
+  m_AnchoredPosition: {x: 26, y: 30.3}
   m_SizeDelta: {x: 347.35, y: 42.021}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5865223390663310901
@@ -722,6 +722,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35.41, y: -82.77}
+  m_AnchoredPosition: {x: -19.7, y: -53}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
