@@ -186,7 +186,7 @@ MonoBehaviour:
   moveSpeed: 8
   dashSpeed: 40
   dashDuration: 0.05
-  dashCooldown: 0.5
+  dashCooldown: 1
   moveLocked: 0
 --- !u!114 &1730695915548111990
 MonoBehaviour:

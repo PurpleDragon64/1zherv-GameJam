@@ -34,8 +34,8 @@ public class UIManager : MonoBehaviour
                 break;
             case GameState.Death:
                 MainMenu.SetActive(false);
-                DeathScreen.SetActive(true);
                 WinScreen.SetActive(false);
+                StartCoroutine(ShowDeathScreen());
                 break;
             case GameState.Win:
                 MainMenu.SetActive(false);
@@ -43,5 +43,10 @@ public class UIManager : MonoBehaviour
                 WinScreen.SetActive(true);
                 break;
         }
+    }
+
+    IEnumerator ShowDeathScreen() {
+        yield return new WaitForSecondsRealtime(.5f);
+		DeathScreen.SetActive(true);
     }
 }

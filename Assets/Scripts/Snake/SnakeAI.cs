@@ -23,7 +23,6 @@ public class SnakeAI : MonoBehaviour
     [SerializeField] float patrolRotateSpeed = 5;
     [SerializeField] float chaserotateSpeed = 25;
     private float rotateSpeed = 5;
-    [Range(0,360)] [SerializeField] float defaultFOVAngle;
     [SerializeField] NavMeshAgent agent; // for navigation
 
 
@@ -43,8 +42,6 @@ public class SnakeAI : MonoBehaviour
         // because of NavMeshPlus (2d)
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-
-        fov.FOVAngle = defaultFOVAngle;
 
         waypointsCount = waypoints.Length;
 
