@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour
             {
                 UpdateGameState(GameState.Playing);
             }
+            if(Input.GetKeyDown(KeyCode.Q)) {
+                // quit game
+                Application.Quit();
+            }
         }
         if (state == GameState.Death || state == GameState.Win)
         {
@@ -55,6 +59,10 @@ public class GameManager : MonoBehaviour
             {
                 UpdateGameState(GameState.Playing);
             }
+            if(Input.GetKeyDown(KeyCode.Q)) { 
+                // quit game
+                Application.Quit();
+		    }
         }
     }
 
