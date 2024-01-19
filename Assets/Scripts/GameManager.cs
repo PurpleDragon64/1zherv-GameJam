@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
                 UpdateGameState(GameState.Playing);
             }
         }
-        if (state == GameState.Death)
+        if (state == GameState.Death || state == GameState.Win)
         {
             if (Input.GetKeyUp(KeyCode.R))
             {
